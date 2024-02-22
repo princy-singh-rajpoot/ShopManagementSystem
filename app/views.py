@@ -9,8 +9,10 @@ class ProductView(View):
   Goggles= Product.objects.filter(category='G')
   return render (request,'app/home.html',{'Sunglasses':Sunglasses,'Contactlenses':Contactlenses,'Goggles':Goggles})
   
-def product_detail(request):
- return render(request, 'app/productdetail.html')
+class ProductDetailView(View):
+    def get(self,request,pk):
+        product = Product.objects.get(pk=pk)
+        return render(request,'app/productdetail.html',{'product':product})
 
 def add_to_cart(request):
  return render(request, 'app/addtocart.html')
