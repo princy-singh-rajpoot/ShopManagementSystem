@@ -32,8 +32,13 @@ def orders(request):
 def change_password(request):
  return render(request, 'app/changepassword.html')
 
-def mobile(request):
- return render(request, 'app/mobile.html')
+# mobile page
+def Eyeeglasses(request,data=None):
+    if data == None:
+        Eyeeglasses = Product.objects.filter(category='E')
+    elif data == 'Dior' or data == 'Prada':
+      Eyeeglasses = Product.objects.filter(category='E').filter(brand=data)
+    return render(request,'app/Eyeeglasses.html',{'Eyeeglasses':Eyeeglasses})
 
 def login(request):
  return render(request, 'app/login.html')
@@ -43,3 +48,4 @@ def customerregistration(request):
 
 def checkout(request):
  return render(request, 'app/checkout.html')
+    
