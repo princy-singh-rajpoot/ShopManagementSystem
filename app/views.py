@@ -33,7 +33,7 @@ def change_password(request):
  return render(request, 'app/changepassword.html')
 
 # mobile page
-def Eyeeglasses(request,data=None):
+def Eyeeglasses(request, data=None):
     if data == None:
         Eyeeglasses = Product.objects.filter(category='E')
     elif data == 'Dior' or data == 'Prada':
