@@ -4,10 +4,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 STATE_CHOICES = (
     ('Andaman and Nicobar Island','Andaman and Nicobar Island'),(' Andhra Pradesh ','Andhra Pradesh '),
     ('Arunachal Pradesh ','Arunachal Pradesh'),('Assam ','Assam'),
-    (' Bihar ','Bihar'),('Chandigarh ','Chandigarh'),
+    ('Bihar ','Bihar'),('Chandigarh ','Chandigarh'),
     ('Chhattisgarh ','Chhattisgarh'),(' Arunachal Pradesh','Arunachal Pradesh'),
-    (' Karnataka ','Karnataka'),('Kerala ','Kerala'),
-    (' akshadweep ','akshadweep'),('Madhya Pradesh','Madhya Pradesh'),
+    ('Karnataka ','Karnataka'),('Kerala ','Kerala'),
+    ('akshadweep ','akshadweep'),('Madhya Pradesh','Madhya Pradesh'),
     ('Manipur','Manipur'),('Maharashtra ','Maharashtra'),
     ('meghalay ','meghalay'),('Mizoram ','Mizoram'),
     ('Nagaland ','Nagaland'),('udisa ','udisa'),
@@ -31,6 +31,10 @@ class Customer(models.Model):
 
 def __str__(self):
      return str(self.id)
+
+@property
+def total_cost(self):
+     return self.quantity * self.product.discounted_price
 
 CATEGORY_CHOICES = (
     ('S','Sunglasses'),
