@@ -1,4 +1,6 @@
+{% comment %} base.html code is common for all others pages. {% endcomment %}
 <!doctype html>
+{% comment %} we use loadstatic beacause we have used css,images,js that are static and are under static folder {% endcomment %}
 {% load static %}
 <html lang="en">
   <head>
@@ -61,7 +63,7 @@
             {% if request.user.is_authenticated %} 
            <li class="nav-item dropdown mx-2">
               <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Princy
+                {{request.user.username|capfirst}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
@@ -74,7 +76,7 @@
               </ul>
             </li>
             <li class="nav-item mx-2">
-             <a href="{% url 'add-to-cart' %}" class="nav-link text-white"><span class="badge bg-danger">2</span> Cart </a>
+             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">2</span> Cart </a>
             </li>
             {% else %}
             <li class="nav-item mx-2">
@@ -89,7 +91,8 @@
        </div>
      </div>
     </nav>
-    {% block banner_slider %} {% endblock banner_slider %}
+    {% comment %} home page images sider and live sale content {% endcomment %}
+    {% block banner_slider %} {% endblock banner_slider %} 
     {% block livesale %} {% endblock livesale %}
     {% block main-content %} {% endblock main-content %}
 

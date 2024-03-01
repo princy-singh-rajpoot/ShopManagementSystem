@@ -9,14 +9,14 @@
         <hr>
 
  <form action="" method="post" novalidate class="shadow p-5">
-   {% comment %} message {% endcomment %}
+     {% comment %} message {% endcomment %}
    {% comment %} {% if messages %}
     {% for message in messages %}
      <p {% if message.tags %} class="alert alert-{{message.tags}}mb-5"{% endif %}>{{message}}</p> 
     {% endfor %}
  {% endif %} {% endcomment %}
  {% comment %} end of message area {% endcomment %}
-  {% csrf_token %}
+   {% csrf_token %}
     {% for fm in form %}
     <div class="form-group mb-3">{{fm.label_tag}} {{fm}} 
       <small class="text-danger">{{fm.errors|striptags}}</small></div>
