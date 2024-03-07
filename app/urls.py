@@ -1,12 +1,12 @@
 from app import views
 from django.urls import path
 from django.conf import settings
-from django.conf.urls.static import static
+from django.conf.urls.static import static  
 from django.contrib.auth import views as auth_views
 from .forms import LoginForm , MyPasswordChangeForm , MyPasswordResetForm, MySetPasswordForm
 
 urlpatterns = [
-    path('',views.ProductView.as_view(),name="home"),
+    path('', views.ProductView.as_view(), name="home"),
     path('product-detail/<int:pk>',views.ProductDetailView.as_view(), name='product-detail'),
     path('paymentdone/', views.payment_done, name='paymentdone'),
     path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
@@ -18,8 +18,20 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
-    path('Eyeeglasses/',views.Eyeeglasses,name='Eyeeglasses'),
-    path('Eyeeglasses/<slug:data>', views.Eyeeglasses, name='eyedata'),
+
+    path('Readingglasses/',views.Readingglasses,name='Readingglasses'),
+    path('Readingglasses/<slug:data>', views.Readingglasses, name='readingdata'),
+
+    path('Goggles/',views.Goggles, name='Goggles'),
+    path('Goggles/<slug:data>', views.Goggles, name='gogglesdata'),
+
+    path('Sunglasses/',views.Sunglasses, name='Sunglasses'),
+    path('Sunglasses/<slug:data>', views.Sunglasses, name='sunglassesdata'),
+
+    path('Contactlenses/',views.Contactlenses, name='Contactlenses'),
+    path('Contactlenses/<slug:data>', views.Contactlenses, name='Contactlensesdata'),
+
+
     path('accounts/login/', auth_views.LoginView.as_view(template_name='app/login.html/', authentication_form=LoginForm),name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'),name='logout'),
     path('passwordchange/',auth_views.PasswordChangeView.as_view(template_name='app/passwordchange.html', form_class=MyPasswordChangeForm, success_url='/passwordchangedone/'), name='passwordchange'),

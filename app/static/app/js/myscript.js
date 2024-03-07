@@ -1,4 +1,6 @@
-$('#slider1, #slider2, #slider3').owlCarousel({
+$('#slider1, #slider2, #slider3, #slider4',).owlCarousel({
+    // loop true means that the slider will continously display 1 by 1.
+    // when set to 0 , 1 item will display .. when to set to 600, 3 items will be displayed and so on.
     loop: true,
     margin: 20,
     responsiveClass: true,
@@ -22,7 +24,7 @@ $('#slider1, #slider2, #slider3').owlCarousel({
     }
 })
 
-$('.plus-cart').click(function() {
+$('.plus-cart').click(function () {
     var id = $(this).attr("pid").toString();
     var eml = this.parentNode.children[2]
     $.ajax({
@@ -31,15 +33,15 @@ $('.plus-cart').click(function() {
         data: {
             prod_id: id
         },
-        success: function (data){
-           eml.innerText = data.quantity
-           document.getElementById("amount").innerText = data.amount
-           document.getElementById("totalamount").innerText = data.totalamount
+        success: function (data) {
+            eml.innerText = data.quantity
+            document.getElementById("amount").innerText = data.amount
+            document.getElementById("totalamount").innerText = data.totalamount
         }
     })
 })
 
-$('.remove-cart').click(function() {
+$('.remove-cart').click(function () {
     var id = $(this).attr("pid").toString();
     var eml = this
     $.ajax({
@@ -48,14 +50,14 @@ $('.remove-cart').click(function() {
         data: {
             prod_id: id
         },
-        success: function (data){
-           document.getElementById("amount").innerText = data.amount
-           document.getElementById("totalamount").innerText = data.totalamount
+        success: function (data) {
+            document.getElementById("amount").innerText = data.amount
+            document.getElementById("totalamount").innerText = data.totalamount
         }
     })
 })
 
-$('.remove-cart').click(function() {
+$('.remove-cart').click(function () {
     var id = $(this).attr("pid").toString();
     var eml = this
     $.ajax({
@@ -64,10 +66,10 @@ $('.remove-cart').click(function() {
         data: {
             prod_id: id
         },
-        success: function (data){
-           document.getElementById("amount").innerText = data.amount
-           document.getElementById("totalamount").innerText = data.totalamount
-           eml.parentNode.parentNode.parentNode.parentNode.remove()
+        success: function (data) {
+            document.getElementById("amount").innerText = data.amount
+            document.getElementById("totalamount").innerText = data.totalamount
+            eml.parentNode.parentNode.parentNode.parentNode.remove()
         }
     })
 })  

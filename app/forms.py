@@ -6,6 +6,7 @@ from django.contrib.auth import password_validation
 from .models import Customer
 
 class CustomerRegistrationForm(UserCreationForm):
+    username = UsernameField(widget=forms.TextInput(attrs= {'autofocus':True, 'class':'form-control'}))
     password1 = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
     password2 = forms.CharField(label='Confirm Password(again)',widget=forms.PasswordInput(attrs={'class':'form-control'}))
     email = forms.CharField(required=True,widget=forms.EmailInput(attrs={'class':'form-control'}))
@@ -35,4 +36,4 @@ class CustomerProfileForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['name','locality','city','state','zipcode']
-        widgets = {'name':forms.TextInput(attrs={'class':'form-cotrol'}),'locality':forms.TextInput(attrs={'class':'form-cotrol'}),'city':forms.TextInput(attrs={'class':'form-cotrol'}),'state':forms.Select(attrs={'class':'form-cotrol'}),'zipcode':forms.NumberInput(attrs={'class':'form-cotrol'})}
+        widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),'locality':forms.TextInput(attrs={'class':'form-control'}),'city':forms.Select(attrs={'class':'form-control'}),'state':forms.Select(attrs={'class':'form-control'}),'zipcode':forms.NumberInput(attrs={'class':'form-control'})}

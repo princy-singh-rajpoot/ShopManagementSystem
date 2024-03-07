@@ -23,41 +23,42 @@
 
     <title> Optical Shop | {% block title %} {% endblock title %} </title>
   </head>
+
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-     <div class="container">
-       <a class="navbar-brand" href="/"> Optical-Shop</a>
-       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-           <li class="nav-item">
-             <a class="nav-link active" aria-current="page" href="/">Home</a>
-           </li>
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Category
-             </a>
-             <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
-               <li><a class="dropdown-item" href="{% url 'Eyeeglasses' %}">Eye-glasses</a></li>
-               <li><a class="dropdown-item" href="#">Contact-Lenses</a></li>
-             </ul>
-           </li>
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Fashion
-             </a>
-             <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
-               <li><a class="dropdown-item" href="#">Sunglasses</a></li>
-               <li><a class="dropdown-item" href="#">Contact lenses</a></li>
-             </ul>
-           </li>
-         </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container">
+        <a class="navbar-brand" href="/">Optical-Shop</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"> </span>
+          </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"> <a class="nav-link active" aria-current="page" href="/">Home</a></li>
+           
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
+              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+              <li> <a class="dropdown-item" href="{% url 'Readingglasses' %}">Reading-Glasses</a></li>
+              <li> <a class="dropdown-item" href="{% url 'Goggles' %}">Goggles</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Fashion </a>
+              <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
+                {% comment %} <li><a class="dropdown-item" href="#">Sun-glasses</a></li> {% endcomment %}
+                <li> <a class="dropdown-item" href="{% url 'Sunglasses' %}">Sun-glasses</a></li>
+                <li><a class="dropdown-item" href="{% url 'Contactlenses' %}">Contact-lenses</a></li>
+              </ul>
+            </li>
+          </ul>
+          
          <form class="d-flex">
-           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-warning" type="submit">P</button>
+            <input class="form-control me-2" type="search" placeholder="search" aria-label="Search">
+            {% comment %} <button class="btn btn-warning" type="submit"> {{first_letter}}</button> {% endcomment %}
          </form>
+
          <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if request.user.is_authenticated %} 
@@ -69,10 +70,10 @@
                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                 <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
-                <form method="post" action="{% url 'logout' %}">
+                <form method="post" class="dropdown-item" action="{% url 'logout' %}">
                   {% csrf_token %}
                   <button type="submit">logout</button>
-              </form>
+                </form>
               </ul>
             </li>
             <li class="nav-item mx-2">
@@ -93,11 +94,11 @@
     </nav>
     {% comment %} home page images sider and live sale content {% endcomment %}
     {% block banner_slider %} {% endblock banner_slider %} 
-    {% block livesale %} {% endblock livesale %}
+    {% comment %} {% block livesale %} {% endblock livesale %} {% endcomment %}
     {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->
-    <footer class="container-fluid bg-dark text-center p-2 mt-5">
+    <footer class="container-fluid bg-success text-center p-4 mt-2">
         <small class="text-white"> Copyright &copy; 2024 || Designed By Princy Singh || </small>
         <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
     </footer> <!-- End Footer -->
