@@ -9,20 +9,28 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 class ProductView(View):
- def get (self, request): 
+ def get(self, request): 
   Sunglasses= Product.objects.filter(category='S')
   Contactlenses= Product.objects.filter(category='C')
   Goggles= Product.objects.filter(category='G')
   Readinglasses= Product.objects.filter(category='R')
   return render (request,'app/home.html',{'Sunglasses':Sunglasses,'Contactlenses':Contactlenses,'Readinglasses':Readinglasses,'Goggles':Goggles})
-  
+ 
+ def post(self, request): 
+    search_query = request.POST['search_query']
+        # Filter your model by the search query
+    Sunglasses= Product.objects.filter(category='S',title__icontains=search_query)    
+    Contactlenses= Product.objects.filter(category='C',title__icontains=search_query)
+    Goggles= Product.objects.filter(category='G',title__icontains=search_query) 
+    Readinglasses= Product.objects.filter(category='R',title__icontains=search_query) 
+    return render (request,'app/home.html',{'Sunglasses':Sunglasses,'Contactlenses':Contactlenses,'Readinglasses':Readinglasses,'Goggles':Goggles})
+ 
 class ProductDetailView(View):
   def get(self,request,pk):
     product = Product.objects.get(pk=pk)
     item_already_in_cart = False
     if request.user.is_authenticated:
       item_already_in_cart = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
-      
     return render(request,'app/productdetail.html',{'product':product,'item_already_in_cart':item_already_in_cart})
 
 @login_required

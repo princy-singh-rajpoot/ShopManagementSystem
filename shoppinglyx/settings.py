@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context_processors.message_processor',
             ],
         },
     },
@@ -132,3 +133,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Orki4SF5Ke04EYEYCaIrzvseAzAFBix6o7pUZn8jWGb6xtGZEUyiFwgHdiq5EhAtyiWc4m6uE5o3zOZ6QIq8NE400B8aToHGI'
+STRIPE_SECRET_KEY = 'sk_test_51Orki4SF5Ke04EYE0apARLaGDWAkQRAvBSlepCHlIlj8gA6ZmclIl5OzOYCWLqzmRdMzgKpUaaJFuVWq6DBDidRT00Tqb9NJ1g'
