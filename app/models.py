@@ -60,29 +60,29 @@ CATEGORY_CHOICES = (
 
 # if using ImageField we must install PILLOW pakacge to work with images. cmd >> pip install pillow
 class Product(models.Model):
-    title = models.CharField(max_length=100)
-    selling_price=models.FloatField()
-    discounted_price=models.FloatField()
-    description = models.TextField()
-    brand=models.CharField(max_length=100)
-    category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
-    product_image=models.ImageField(upload_to='productimg')
+  title = models.CharField(max_length=100)
+  selling_price=models.FloatField()
+  discounted_price=models.FloatField()
+  description = models.TextField()
+  brand=models.CharField(max_length=100)
+  category=models.CharField(choices=CATEGORY_CHOICES,max_length=2)
+  product_image=models.ImageField(upload_to='productimg')
 
-    def __str__ (self):
-      return str(self.id)
+  def __str__ (self):
+    return str(self.id)
 
 # default 1 means that quantity should not be negative no.
 class Cart(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
-    product=models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity=models.PositiveIntegerField(default=1)
+  user=models.ForeignKey(User, on_delete=models.CASCADE)
+  product=models.ForeignKey(Product, on_delete=models.CASCADE)
+  quantity=models.PositiveIntegerField(default=1)
 
-    def __str__(self):
-      return str(self.id)
+  def __str__(self):
+    return str(self.id)
 
-    @property
-    def total_cost(self):
-      return self.quantity * self.product.discounted_price
+  @property
+  def total_cost(self):
+    return self.quantity * self.product.discounted_price
     
 STATUS_CHOICES = (
   ('Accepted','Accepted'),

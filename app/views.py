@@ -33,26 +33,13 @@ class ProductDetailView(View):
       item_already_in_cart = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
     return render(request,'app/productdetail.html',{'product':product,'item_already_in_cart':item_already_in_cart})
   
-class CustomerRegistrationView(View):
-  def get(self, request):
-    form = CustomerRegistrationForm()
-    return render(request, 'app/customerregistration.html',{'form':form})
-  def post(self, request):
-    form = CustomerRegistrationForm(request.POST)
-    if form.is_valid(): 
-      form.save()
-      messages.success(request,"Congratulations!! Registered Succesfully. Now you can login happily") 
-    else:
-      messages.warning(request,"Oops Sorry!! You might have enter wrong data. Please try again") 
-    return render(request,'app/customerregistration.html',{'form':form}) 
-
 @login_required
 def add_to_cart(request):
- user = request.user
- product_id = request.GET.get('prod_id')
- product = Product.objects.get(id=product_id)
- Cart(user=user, product=product).save()
- return redirect('/cart')
+  user = request.user
+  product_id = request.GET.get('prod_id')
+  product = Product.objects.get(id=product_id)
+  Cart(user=user, product=product).save()
+  return redirect('/cart')
 
 @login_required
 def show_cart(request):
@@ -249,6 +236,19 @@ class ProfileView(View):
       messages.warning(request,"invalid data")
     return render(request,'app/profile.html',{'form':form,'active':'btn-primary'})
   
+class CustomerRegistrationView(View):
+  def get(self, request):
+    form = CustomerRegistrationForm()
+    return render(request, 'app/customerregistration.html',{'form':form})
+  def post(self, request):
+    form = CustomerRegistrationForm(request.POST)
+    if form.is_valid(): 
+      form.save()
+      messages.success(request,"Congratulations!! Registered Succesfully. Now you can login happily") 
+    else:
+      messages.warning(request,"Oops Sorry!! You might have enter wrong data. Please try again") 
+    return render(request,'app/customerregistration.html',{'form':form}) 
+
 @login_required
 def address(request):
   add = Customer.objects.filter(user=request.user)
@@ -256,11 +256,23 @@ def address(request):
 
 class updateAddress(View):
   def get(self,request,pk):
-    form = CustomerProfileForm()
+    add = Customer.objects.get(pk=pk)
+    form = CustomerProfileForm(instance=add)
     return render(request,'app/updateAddress.html',{'form':form})
   def post(self,request,pk):
     form = CustomerProfileForm(request.POST)
-    return render(request,'app/updateAddress.html',{'form':form})
+    if form.is_valid():
+      add = Customer.objects.get(pk=pk)
+      add.name = form.cleaned_data['name']
+      add.locality = form.cleaned_data['locality']
+      add.city = form.cleaned_data['city']
+      add.state = form.cleaned_data['state']
+      add.zipcode = form.cleaned_data['zipcode']
+      add.save()
+      messages.success(request,"Congratulations! Profile updated Successfully!")
+    else:
+      messages.warning(request,"Oops sorry! There might be some problem, please try again later!")
+    return redirect("address")
   
    
  

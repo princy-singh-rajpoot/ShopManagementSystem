@@ -19,11 +19,11 @@
                         <div class="card m-2">
                             <div class="card-body">
                                 <h3> Address  {{forloop.counter}} </h3>
-                                <p> Name :     {{ad.name}} </p>
+                                <p> Name :    {{ad.name}} </p>
                                 <p> Locality :{{ad.locality}} </p>
                                 <p> City :    {{ad.city}} </p>
-                                <p> State :    {{ad.state}} </p>
-                                <p> Pin Code : {{ad.zipcode}} </p>
+                                <p> State :   {{ad.state}} </p>
+                                <p> Pin Code :{{ad.zipcode}} </p>
                                 <p class="text-center"> <a href="{% url 'updateAddress' pk=ad.id %}" type="button" class="btn btn-danger"> Update </a></p>
                             </div>
                         </div>

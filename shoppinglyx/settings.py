@@ -118,12 +118,10 @@ STATIC_URL = 'static/'
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR/'media'
 LOGIN_REDIRECT_URL = '/profile/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Orki4SF5Ke04EYEYCaIrzvseAzAFBix6o7pUZn8jWGb6xtGZEUyiFwgHdiq5EhAtyiWc4m6uE5o3zOZ6QIq8NE400B8aToHGI'
-STRIPE_SECRET_KEY = 'sk_test_51Orki4SF5Ke04EYE0apARLaGDWAkQRAvBSlepCHlIlj8gA6ZmclIl5OzOYCWLqzmRdMzgKpUaaJFuVWq6DBDidRT00Tqb9NJ1g'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
