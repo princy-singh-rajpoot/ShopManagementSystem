@@ -47,17 +47,22 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Fashion </a>
               <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
-                {% comment %} <li><a class="dropdown-item" href="#">Sun-glasses</a></li> {% endcomment %}
                 <li> <a class="dropdown-item" href="{% url 'Sunglasses' %}">Sun-glasses</a></li>
                 <li><a class="dropdown-item" href="{% url 'Contactlenses' %}">Contact-lenses</a></li>
               </ul>
             </li>
           </ul>
           
-         <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="search" aria-label="Search">
-            {% comment %} <button class="btn btn-warning" type="submit"> {{first_letter}}</button> {% endcomment %}
-         </form>
+         <form class="d-flex" role="search" method="POST">
+          {% csrf_token %}
+          <input
+             class="form-control me-2"
+             type="search"
+             placeholder="Search"
+             name="search_query"
+             required aria-label="Search"
+          >
+          </form>
 
          <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -77,8 +82,11 @@
               </ul>
             </li>
             <li class="nav-item mx-2">
-             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">2</span> Cart </a>
+             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">{{item_already_in_cartt}} </span> Cart </a>
             </li>
+            <li class="nav-item mx-2">
+              <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">5 </span> wishlist </a>
+             </li>
             {% else %}
             <li class="nav-item mx-2">
              <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
