@@ -38,3 +38,7 @@ class CustomerProfileForm(forms.ModelForm):
         model = Customer
         fields = ['name','locality','city','state','zipcode']
         widgets = {'name':forms.TextInput(attrs={'class':'form-control'}),'locality':forms.TextInput(attrs={'class':'form-control'}),'city':forms.Select(attrs={'class':'form-control'}),'state':forms.Select(attrs={'class':'form-control'}),'zipcode':forms.NumberInput(attrs={'class':'form-control'})}
+        
+# Each form class here represents a different aspect of user authentication and profile management within a Django web application. 
+# By customizing these forms, 
+# developers can tailor the user experience and data validation to suit the specific requirements of their application.

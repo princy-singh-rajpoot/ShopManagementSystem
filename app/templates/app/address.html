@@ -1,17 +1,26 @@
 {% extends 'app/base.html' %}
+{% comment %} This line indicates that the current template extends another template named base.html.
+ This means that the content of this template will be inserted into the specified base template. {% endcomment %}
+
 {% load static %}
+{% comment %} This line loads the static files such as CSS, JavaScript, and images for the template. {% endcomment %}
+
 {% block title %}Address Page{% endblock title %}
+
 {% block main-content %}
+{% comment %}  This block is where the main content of the page will be inserted.  {% endcomment %}
+
 <div class="container my-5">
     <div class="row">
         <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+        {% comment %} Inside the container, there's a row with two columns: {% endcomment %}
         <div class="col-sm-2 border-end">
             <ul class="list-unstyled">
                 <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
                 <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-success">Address</a></li>
+                 {% comment %} contain a link to navigate other page. {% endcomment %}
             </ul>
         </div>
-
         <div class="col-sm-8 offset-sm-1">
             <div class="row">
                 {% for ad in add %} 
@@ -25,12 +34,16 @@
                                 <p> State :   {{ad.state}} </p>
                                 <p> Pin Code :{{ad.zipcode}} </p>
                                 <p class="text-center"> <a href="{% url 'updateAddress' pk=ad.id %}" type="button" class="btn btn-danger"> Update </a></p>
+                                {% comment %} displays a list of addresses fetched from the add context variable. {% endcomment %}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-        </div>
+        </div> 
     </div>
 </div>
 {% endblock main-content %}
+{% comment %} In summary, this template is used to display a page titled "Address Page" with a list of addresses. 
+It extends a base template, defines a block for the main content, and
+iterates over a list of addresses to display their details. {% endcomment %}

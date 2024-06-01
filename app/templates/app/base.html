@@ -1,5 +1,5 @@
 {% comment %} base.html code is common for all others pages. {% endcomment %}
-<!doctype html>
+<doctype html>
 {% comment %} we use loadstatic beacause we have used css,images,js that are static and are under static folder {% endcomment %}
 {% load static %}
 <html lang="en">
@@ -102,8 +102,9 @@
     </nav>
     {% comment %} home page images sider and live sale content {% endcomment %}
     {% block banner_slider %} {% endblock banner_slider %} 
-    {% comment %} {% block livesale %} {% endblock livesale %} {% endcomment %}
+    {% block livesale %} {% endblock livesale %}
     {% block main-content %} {% endblock main-content %}
+    {% block payment-gateway %} {% endblock payment-gateway %}
 
     <!-- Start Footer -->
     <footer class="container-fluid bg-success text-center p-4 mt-2">

@@ -8,7 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 STATE_CHOICES = (
   ('Andaman and Nicobar Island','Andaman and Nicobar Island'),
-  (' Andhra Pradesh ','Andhra Pradesh '),('Assam ','Assam'),
+  ('Andhra Pradesh ','Andhra Pradesh '),('Assam ','Assam'),
   ('Arunachal Pradesh ','Arunachal Pradesh'),('Chhattisgarh ','Chhattisgarh'),
   ('Bihar ','Bihar'),('Chandigarh ','Chandigarh'),('Goa ','Goa'),
   (' Arunachal Pradesh','Arunachal Pradesh'),('akshadweep ','akshadweep'),
@@ -45,10 +45,8 @@ class Customer(models.Model):
     city = models.CharField(choices=CITY_CHOICES,max_length=50)
     zipcode=models.IntegerField()
     state=models.CharField(choices=STATE_CHOICES,max_length=50)
-
-# id is converted to string.
     def __str__(self):
-      return str(self.id)
+      return self.name
 
 # product view
 CATEGORY_CHOICES = (
@@ -58,7 +56,7 @@ CATEGORY_CHOICES = (
   ('G','Goggles')
 )
 
-# if using ImageField we must install PILLOW pakacge to work with images. cmd >> pip install pillow
+# if using ImageField we must install PILLOW package to work with images. cmd >> pip install pillow
 class Product(models.Model):
   title = models.CharField(max_length=100)
   selling_price=models.FloatField()
@@ -89,8 +87,17 @@ STATUS_CHOICES = (
   ('Packed','Packed'),
   ('On the way','On the way'),
   ('Delivered','Delivered'),
-  ('Cancel','Cancel')
+  ('Cancel','Cancel'),
+  ('Pending','Pending'),
 )
+
+class Payment(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  amount = models.FloatField()
+  razorpay_order_id = models.CharField(max_length=100,blank=True,null=True)
+  razorpay_payment_status = models.CharField(max_length=100,blank=True,null=True)
+  razorpay_payment_id = models.CharField(max_length=100,blank=True,null=True)
+  paid = models.BooleanField(default=False)
 
 class OrderPlaced(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE)
@@ -99,7 +106,7 @@ class OrderPlaced(models.Model):
     quantity=models.PositiveIntegerField(default=1)
     ordered_date=models.DateTimeField(auto_now_add=True)
     status=models.CharField(max_length=50,choices=STATUS_CHOICES,default='Pending')
-
+    payment = models.ForeignKey(Payment,on_delete = models.CASCADE,default="")
     @property
     def total_cost(self):
       return self.quantity * self.product.discounted_price
