@@ -30,7 +30,7 @@ urlpatterns = [
     path('accounts/login/', auth_view.LoginView.as_view(template_name='app/login.html/', authentication_form=LoginForm),name='login'),
     path('logout/', auth_view.LogoutView.as_view(next_page='login'),name='logout'),
     # path('checkout/', views.checkout.as_view(), name='checkout'), 
-    path('checkout/',views.checkout, name='checkout'), 
+    # path('checkout/',views.checkout, name='checkout'), 
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('accounts/login',auth_view.LoginView.as_view(template_name='app/login.html',authentication_form=LoginForm),name='login'), 
     path('passwordchange/', auth_view.PasswordChangeView.as_view(template_name='app/passwordchange.html', form_class=MyPasswordChangeForm, success_url='/passwordchangedone/'), name='passwordchange'),
