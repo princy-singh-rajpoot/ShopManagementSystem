@@ -66,3 +66,38 @@ Shop Management System is a web-based e-commerce platform that allows users to b
     Admin Dashboard: Access the admin dashboard at http://127.0.0.1:8000/admin/ using the superuser credentials.
     User Registration and Login: Register a new user account or log in with existing credentials to start shopping.
     Browse Products: Explore the product catalog, add items to the shopping cart, and proceed to checkout.
+
+**Deployment**
+To deploy the application to a production environment, follow these steps:
+
+1. **Set DEBUG to False:**
+
+In shop_management_system/settings.py, set DEBUG = False.
+
+2. **Configure Allowed Hosts:**
+
+Add your domain name to the ALLOWED_HOSTS setting.
+
+3. **Set up Static and Media Files:**
+
+Configure your web server (e.g., Nginx, Apache) to serve static and media files.
+
+4. **Configure the Database:**
+
+Set up a production-ready database (e.g., PostgreSQL) and update the DATABASES setting.
+
+**Contributing**
+Contributions are welcome! Please follow these steps to contribute:
+
+Fork the repository.
+Create a new branch for your feature or bugfix.
+Commit your changes with a descriptive message.
+Push your changes to your fork.
+Create a pull request to the main repository.
+
+Contact
+For any questions or suggestions, please contact:
+
+[Princy Singh]
+Email: princyvandanasingh@gmail.com
+GitHub: (https://github.com/princy-singh-rajpoot)
