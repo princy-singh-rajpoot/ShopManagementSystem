@@ -155,10 +155,17 @@ def orders(request):
 #         amount += tempamount
 #       totalamount = amount + shipping_amount
 #       razoramount = int(totalamount * 100) 
+<<<<<<< HEAD
 #       client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
 #       data = { "amount": razoramount, "currency":"INR","receipt":"order_receipt_id"}
 #       payment_response = client.order.create(data=data)
 #       print(payment_response) 
+=======
+      # client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+      # data = { "amount": razoramount, "currency":"INR","receipt":"order_receipt_id"}
+      # payment_response = client.order.create(data=data)
+      # print(payment_response) 
+>>>>>>> 6f7d96d89177f20bf2782b54e7fc418665b39e7e
       
       # order_id = payment_response['id']
       # order_status = payment_response['status']
