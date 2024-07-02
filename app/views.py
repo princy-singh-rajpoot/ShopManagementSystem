@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.http import JsonResponse  
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-import razorpay
+# import razorpay
 
 class ProductView(View):
   def get(self, request): 
@@ -128,37 +128,37 @@ def orders(request):
   op = OrderPlaced.objects.filter(user=request.user)
   return render(request, 'app/orders.html',{'order_placed':op})
 
-@login_required
-def payment_done(request):
-  user = request.user
-  custid = request.GET.get('custid')
-  customer = Customer.objects.get(id=custid)
-  cart = Cart.objects.filter(user=user)
-  for c in cart:
-    OrderPlaced(user=user, customer=customer, product=c.product,quantity=c.quantity).save()
-    c.delete()
-    return redirect("orders")
+# @login_required
+# def payment_done(request):
+#   user = request.user
+#   custid = request.GET.get('custid')
+#   customer = Customer.objects.get(id=custid)
+#   cart = Cart.objects.filter(user=user)
+#   for c in cart:
+#     OrderPlaced(user=user, customer=customer, product=c.product,quantity=c.quantity).save()
+#     c.delete()
+#     return redirect("orders")
   
-@login_required 
-class checkout(View):
-  def get(request):
-    user = request.user
-    add = Customer.objects.filter(user=user)
-    cart_items = Cart.objects.filter(user=user)
-    amount = 0.0
-    shipping_amount = 70.0
-    totalamount = 0.0
-    cart_product = [p for p in Cart.objects.all() if p.user == request.user]
-    if cart_product :
-      for p in cart_product:
-        tempamount = p.quantity * p.product.discounted_price
-        amount += tempamount
-      totalamount = amount + shipping_amount
-      razoramount = int(totalamount * 100) 
-      client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
-      data = { "amount": razoramount, "currency":"INR","receipt":"order_receipt_id"}
-      payment_response = client.order.create(data=data)
-      print(payment_response) 
+# @login_required 
+# class checkout(View):
+#   def get(request):
+#     user = request.user
+#     add = Customer.objects.filter(user=user)
+#     cart_items = Cart.objects.filter(user=user)
+#     amount = 0.0
+#     shipping_amount = 70.0
+#     totalamount = 0.0
+#     cart_product = [p for p in Cart.objects.all() if p.user == request.user]
+#     if cart_product :
+#       for p in cart_product:
+#         tempamount = p.quantity * p.product.discounted_price
+#         amount += tempamount
+#       totalamount = amount + shipping_amount
+#       razoramount = int(totalamount * 100) 
+#       client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+#       data = { "amount": razoramount, "currency":"INR","receipt":"order_receipt_id"}
+#       payment_response = client.order.create(data=data)
+#       print(payment_response) 
       
       # order_id = payment_response['id']
       # order_status = payment_response['status']
